@@ -3,7 +3,7 @@ package cn.itcast.client;
 import cn.itcast.message.RpcRequestMessage;
 import cn.itcast.protocol.MessageCodecSharable;
 import cn.itcast.protocol.ProcotolFrameDecoder;
-import cn.itcast.server.handler.RpcResponseMessageHandler;
+import cn.itcast.client.handler.RpcResponseMessageHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
