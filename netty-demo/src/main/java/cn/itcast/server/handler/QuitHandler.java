@@ -6,23 +6,18 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * @ClassName QuitHandler
- * @Description TODO
- * @Author admin
- * @Date 2022/6/6 22:19
- * @Version 1.0
- **/
 @Slf4j
 @ChannelHandler.Sharable
 public class QuitHandler extends ChannelInboundHandlerAdapter {
-    // 正常断开触发
+
+    // 当连接断开时触发 inactive 事件
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         SessionFactory.getSession().unbind(ctx.channel());
         log.debug("{} 已经断开", ctx.channel());
     }
-    // 异常断开触发
+
+    // 当出现异常时触发
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         SessionFactory.getSession().unbind(ctx.channel());

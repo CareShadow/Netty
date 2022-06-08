@@ -44,7 +44,7 @@ public interface GroupSession {
     /**
      * 获取组成员
      * @param name 组名
-     * @return 成员集合, 没有成员会返回 empty set
+     * @return 成员集合, 如果群不存在或没有成员会返回 empty set
      */
     Set<String> getMembers(String name);
 

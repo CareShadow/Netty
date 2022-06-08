@@ -19,8 +19,7 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
 
     @Override
     public void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
-        // 协议要为2的整数倍
-        // 1. 4 字节的魔数 校验
+        // 1. 4 字节的魔数
         out.writeBytes(new byte[]{1, 2, 3, 4});
         // 2. 1 字节的版本,
         out.writeByte(1);
@@ -54,7 +53,6 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         int length = in.readInt();
         byte[] bytes = new byte[length];
         in.readBytes(bytes, 0, length);
-        // jdk反序列化
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Message message = (Message) ois.readObject();
         log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);

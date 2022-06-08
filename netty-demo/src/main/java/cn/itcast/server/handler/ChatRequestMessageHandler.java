@@ -8,22 +8,14 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-/**
- * @ClassName ChatRequestMessageHandler
- * @Description TODO
- * @Author admin
- * @Date 2022/6/6 17:36
- * @Version 1.0
- **/
 @ChannelHandler.Sharable
 public class ChatRequestMessageHandler extends SimpleChannelInboundHandler<ChatRequestMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ChatRequestMessage msg) throws Exception {
         String to = msg.getTo();
-        // 获取服务端信道
         Channel channel = SessionFactory.getSession().getChannel(to);
         // 在线
-        if(channel != null) {
+        if (channel != null) {
             channel.writeAndFlush(new ChatResponseMessage(msg.getFrom(), msg.getContent()));
         }
         // 不在线

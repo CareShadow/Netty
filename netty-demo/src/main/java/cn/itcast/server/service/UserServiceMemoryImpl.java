@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserServiceMemoryImpl implements UserService {
-    // 用户列表
     private Map<String, String> allUserMap = new ConcurrentHashMap<>();
 
     {
